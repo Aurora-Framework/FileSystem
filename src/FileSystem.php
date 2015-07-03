@@ -62,13 +62,13 @@ class FileSystem
    public static function mime($file, $guess = true)
 	{
 		if (function_exists('finfo_open')) {
-   	// Get mime using the file information functions
-   	$info = finfo_open(FILEINFO_MIME_TYPE);
-   	$mime = finfo_file($info, $file);
-   	finfo_close($info);
-   	return $mime;
-	}
-	return false;
+   		// Get mime using the file information functions
+   		$info = finfo_open(FILEINFO_MIME_TYPE);
+   		$mime = finfo_file($info, $file);
+   		finfo_close($info);
+   		return $mime;
+		}
+		return false;
 	}
 
 	public static function delete($file)
@@ -80,14 +80,14 @@ class FileSystem
 	{
 		$iterator = new FilesystemIterator($path);
 		foreach ($iterator as $item) {
-   	if ($item->isDir()) {
-			$this->deleteDirectory($item->getPathname());
-   	} else {
-	   	$this->delete($item->getPathname());
-   	}
-	}
+	   	if ($item->isDir()) {
+				$this->deleteDirectory($item->getPathname());
+	   	} else {
+		   	$this->delete($item->getPathname());
+	   	}
+		}
 
-	return rmdir($path);
+		return rmdir($path);
 	}
 
    public static function glob($pattern, $flags = 0)
