@@ -1,5 +1,6 @@
 {
 	"name": "aurora-framework/filesystem",
+	"description": "Useful filesystem helper",
 	"license": "MIT",
 	"authors": [
 		{
