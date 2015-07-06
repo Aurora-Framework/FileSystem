@@ -20,26 +20,32 @@
 namespace Aurora\Adapter;
 
 use Aurora\AbstractAdapter;
+use Aurora\Exception\UnableToParseFormatException;
 
 class PHP extends AbstractAdapter
 {
+	public $extension = ".php";
 
-	public function parse($path){
+	public function parse($data)
+	{
 
-		try {
-			$temp = require $path;
-		} catch (\Exception $e) {
-			// To do throw errors
+		if (is_callable($data)) {
+			$data = call_user_func($data);
 		}
 
-		if (is_callable($temp)) {
-			$temp = call_user_func($temp);
+		if (!$data || !is_array($data)) {
+			throw new UnableToParseFormatException;
 		}
 
-		if (!$temp || !is_array($temp)) {
-			// To do throw error
+		return $data;
+	}
+
+	protected function getContent($path)
+	{
+		if ($this->getValidPath($this->basePath.$path.$this->extension)) {
+			return require_once $this->basePath.$path.$this->extension;
 		}
 
-		return $temp;
+		return null;
 	}
 }

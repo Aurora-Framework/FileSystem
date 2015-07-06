@@ -22,6 +22,7 @@ namespace Aurora;
 class AbstractAdapter implements AdapterInterface
 {
 	public $basePath;
+	public $extension;
 
 	public function setBasePath($basePath)
 	{
@@ -45,10 +46,8 @@ class AbstractAdapter implements AdapterInterface
 
 	public function loadFile($file)
 	{
-		$data = $this->getContent($file);
-
-		if ($data) {
-			$this->parse($data);
+		if ($data = $this->getContent($file)) {
+			return $this->parse($data);
 		}
 
 		return null;
@@ -56,7 +55,7 @@ class AbstractAdapter implements AdapterInterface
 
 	private function getValidPath($path)
 	{
-		if (file_exists($basePath.$path)) {
+		if (file_exists($path)) {
 			return true;
 		}
 
@@ -66,8 +65,8 @@ class AbstractAdapter implements AdapterInterface
 
 	protected function getContent($path)
 	{
-		if ($this->getValidPath($this->basePath.$path)) {
-			return file_get_contents($this->basePath.$path);
+		if ($this->getValidPath($this->basePath.$path.$this->extension)) {
+			return file_get_contents($this->basePath.$path.$this->extension);
 		}
 
 		return null;

@@ -62,7 +62,6 @@ class FileSystem
    public static function mime($file, $guess = true)
 	{
 		if (function_exists('finfo_open')) {
-   		// Get mime using the file information functions
    		$info = finfo_open(FILEINFO_MIME_TYPE);
    		$mime = finfo_file($info, $file);
    		finfo_close($info);
