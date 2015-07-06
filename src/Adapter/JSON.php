@@ -23,7 +23,7 @@ use Aurora\AbstractAdapter;
 
 class JSON extends AbstractAdapter
 {
-	public $extension = ".php";
+	public $extension = ".json";
 
 	public function parse($data)
 	{
