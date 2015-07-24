@@ -3,12 +3,12 @@ namespace Aurora\Adapter;
 
 use Aurora\AbstractAdapter;
 
-class JSON extends AbstractAdapter
+class STR extends AbstractAdapter
 {
-	public $extension = ".json";
+	public $extension = ".str";
 
 	public function parse($data)
 	{
-		return json_decode($data, true);
+		return parse_str($data);
 	}
 }

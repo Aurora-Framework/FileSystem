@@ -3,12 +3,12 @@ namespace Aurora\Adapter;
 
 use Aurora\AbstractAdapter;
 
-class JSON extends AbstractAdapter
+class INI extends AbstractAdapter
 {
-	public $extension = ".json";
+	public $extension = ".ini";
 
 	public function parse($data)
 	{
-		return json_decode($data, true);
+		return parse_ini_string($data);
 	}
 }

@@ -59,7 +59,7 @@ class FileSystem
 		return pathinfo($file, PATHINFO_EXTENSION);
 	}
 
-   public static function mime($file, $guess = true)
+   public static function mime($file)
 	{
 		if (function_exists('finfo_open')) {
    		$info = finfo_open(FILEINFO_MIME_TYPE);
